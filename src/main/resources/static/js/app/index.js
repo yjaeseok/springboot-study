@@ -7,6 +7,9 @@ var index = {
         $('#btn-update').on('click', function() {
             _this.update();
         })
+        $('#btn-delete').on('click', function() {
+            _this.delete();
+        })
     },
     save : function() {
         var data = {
@@ -22,7 +25,7 @@ var index = {
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function() {
-            alert('Success');
+            alert('Success create posts');
             window.location.href = '/';
         }).fail(function(error) {
             alert(JSON.stringify(error));
@@ -43,7 +46,22 @@ var index = {
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function() {
-            alert('Success');
+            alert('Success update posts');
+            window.location.href = '/';
+        }).fail(function(error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    delete: function() {
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/posts/' + id,
+            dateType: 'json',
+            contentType: 'application/json; charset=utf-8'
+        }).done(function() {
+            alert('Success posts is deleted.');
             window.location.href = '/';
         }).fail(function(error) {
             alert(JSON.stringify(error));
